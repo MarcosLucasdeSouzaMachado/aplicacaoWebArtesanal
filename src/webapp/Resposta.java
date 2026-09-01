@@ -7,7 +7,9 @@ public class Resposta {
     private int contentLength;
     private String body;
 
-    public Resposta() {}
+    public Resposta() {
+        this.contentType = "text/html";
+    }
     public void setStatus(int codigo, String msg) {
         codigoStatus = codigo;
         msgStatus = msg;
@@ -16,7 +18,7 @@ public class Resposta {
         this.contentType = contentType;
     }
     public void setContentLength(int length) {
-        this.contentLength = contentLength;
+        this.contentLength = length;
     }
     public void setBody(String body) {
         this.body = body;

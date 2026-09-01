@@ -1,6 +1,8 @@
 package webapp;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RespostaTest {
+    @org.junit.jupiter.api.Test
     void getDocumentoBruto(){
         Resposta res = new Resposta();
         res.setStatus(200, "OK");
@@ -15,5 +17,6 @@ public class RespostaTest {
                 
                 <html><body>Oi</body></html>
                 """;
+        assertEquals(bruto, res.getDocumentoBruto());
     }
 }

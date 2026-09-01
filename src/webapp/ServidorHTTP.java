@@ -8,18 +8,40 @@ public class ServidorHTTP {
     protected Requisicao lerRequisicao(InputStream in) throws IOException {
         BufferedReader leitorLinhas = new BufferedReader(
                 new InputStreamReader(in));
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sbCabecalho = new StringBuilder();
         String linha;
+        int contentLength = 0;
+
         while ((linha = leitorLinhas.readLine()) != null && !linha.isBlank()) {
-            sb.append(linha).append("\r\n");
+            sbCabecalho.append(linha).append("\r\n");
+
+            if (linha.startsWith("Content-Length:")) {
+                contentLength = Integer.parseInt(linha.substring("Content-Length:".length()).trim());
+            }
         }
-        String documento = sb.toString();
-        return new Requisicao(sb.toString());
+
+        StringBuilder sbCorpo = new StringBuilder();
+        if (contentLength > 0) {
+            char[] buffer = new char[contentLength];
+            leitorLinhas.read(buffer);
+            sbCorpo.append(buffer);
+        }
+
+        String documentoCompleto = sbCabecalho.toString() + "\r\n" + sbCorpo.toString();
+        return new Requisicao(documentoCompleto);
     }
     protected Pagina getPagina(Requisicao req){
+        String url = req.getURL();
+
         if ("/".equals(req.getURL())){
-            return new Pagina();
-        } else {
+            return new PaginaDoArquivo("Index.html");
+        } else if ("/sobre.html".equals(req.getURL())){
+            return new PaginaDoArquivo("sobre.html");
+        } else if ("/formularios.html".equals(url)){
+            return new PaginaDoArquivo("Formularios.html");
+        } else if (url.startsWith("/receptor")){
+            return new Receptor(req);
+        }else {
             return null;
         }
     }

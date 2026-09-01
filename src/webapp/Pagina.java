@@ -1,6 +1,6 @@
 package webapp;
 
-public class Pagina {
+public abstract class Pagina {
     public String getHtml(){
         return """
             <!DOCTYPE html>
