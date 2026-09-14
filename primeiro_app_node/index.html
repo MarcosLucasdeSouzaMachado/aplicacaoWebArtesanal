@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Biblioteca Virtual - Sistema de Busca</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Biblioteca Virtual</h1>
+        <p class="subtitle">Sistema de Busca de Livros</p>
+        
+        <form action="/buscarNoAcervo" method="GET">
+            <input 
+                type="text" 
+                name="termo" 
+                placeholder="Digite o título do livro..." 
+                required
+            >
+            <button type="submit">Buscar</button>
+        </form>
+        
+        <div class="info">
+            <p>Digite o título (ou parte dele) do livro que deseja encontrar no nosso acervo.</p>
+        </div>
+        
+        <div class="links">
+            <a href="/sobre.html">Sobre nós</a>
+            <span> | </span>
+            <a href="/">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>
