@@ -27,14 +27,14 @@ const servidor = http.createServer((req, res) => {
     
     fs.readFile(caminhoArquivo, (err, data) => {
         if (err) {
-            res.statusCode = 404;
+            res.statusCode = 500;
             res.setHeader('Content-Type', 'text/html; charset=utf-8');
             res.end(`<!DOCTYPE html>
                 <html lang="pt-br">
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Erro 404</title>
+                    <title>Erro 500</title>
                     <style>
                         body {
                             font-family: Arial, sans-serif;
@@ -79,7 +79,7 @@ const servidor = http.createServer((req, res) => {
                 </head>
                 <body>
                     <div class="container">
-                        <h1>Erro 404</h1>
+                        <h1>Erro 500</h1>
                         <p>O recurso "<strong>${caminhoArquivo}</strong>" não foi encontrado!</p>
                         <a href="/">Voltar à página inicial</a>
                     </div>
@@ -88,7 +88,6 @@ const servidor = http.createServer((req, res) => {
             return;
         }
         
-        // Arquivo encontrado - definir Content-Type apropriado
         let extensao = path.extname(caminhoArquivo).toLowerCase();
         let contentType = 'application/octet-stream';
         
@@ -174,7 +173,7 @@ function gerarHTMLComResultados(termo, listaDeLivros) {
     return html;
 }
 
-const porta = 3000;
+const porta = 5500;
 servidor.listen(porta, () => {
     console.log(`Servidor rodando em http://localhost:${porta}`);
     console.log('Pressione Ctrl+C para parar o servidor');
